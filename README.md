@@ -25,6 +25,16 @@ cd data/indicTTS_audio
 python3 unzip_indic.py --input_path <path_to_speaker_zip_file>
 ```
 
+## l2arctic
+
+At the current stage (for better sharing within the collaborators), we upload the dataset to Google Drive. The dataset can be download using a command:
+
+```
+gdown https://drive.google.com/uc?id=1kRA5HgGijT8LhjoQb19ez98fKrJ_9z1r
+```
+
+But do remember to use the original source when make the camera-ready version (as the dataset has license). We can also upload the processed datasets.
+
 # Usage
   * Generate transcripts for the seed+dev set using the pre-trainded ASR (Transcripts are used while training error models)
     ```
@@ -41,6 +51,12 @@ python3 unzip_indic.py --input_path <path_to_speaker_zip_file>
     cd models/error_model
     bash infer_error_model.sh
     ```
+  * Randomly sample some examples from the "selection" set first:
+    ```
+    cd data/preprocess
+    python sample.py
+    ```
+
   * Select the sentences using the error model as proposed in our paper (Equation-2 and Algorithm-1)
     ```
     cd models/error_model
@@ -55,7 +71,7 @@ python3 unzip_indic.py --input_path <path_to_speaker_zip_file>
   * Finetune and Test the ASR on the randomly selected sentences
     ```
     cd models/quartznet_asr
-    bash scripts/finetune_on_randomly_seleced_samples.sh
+    bash scripts/finetune_on_randomly_selected_samples.sh
     bash scripts/test_ASR_finetuned_on_random_sents.sh
     ```
 
